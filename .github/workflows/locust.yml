@@ -16,6 +16,10 @@ on:
         description: 'Run time (e.g., 30s, 1m, 5m)'
         required: true
         default: '1m'
+  push:
+      branches: [main, master]
+  pull_request:
+      branches: [main, master]
 
 jobs:
   run-locust:
