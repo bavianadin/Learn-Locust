@@ -42,7 +42,7 @@ jobs:
       # Menjalankan Locust secara headless (tanpa Web UI)
       - name: Run Locust Load Test
         run: |
-          locust -f locustfile.py \
+          locust -f ep1.py \
             --headless \
             -u ${{ github.event.inputs.users }} \
             -r ${{ github.event.inputs.spawn_rate }} \
