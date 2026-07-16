@@ -1,32 +1,26 @@
 from locust import HttpUser, task, between
 import json
-import random
+# import random
 import logging
 
 class EventLoadTest(HttpUser):
-    host = "https://everlasting-api.ourmoment.my.id"
+    host = "https://mock-api.rrvs.my.id"
 
-    wait_time = between(1, 5)
+    # wait_time = between(1, 5)
+    bearer_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1OWI1ODNiNi1jNTIyLTQ2NTQtODhkMS03OGRjNTZjMTcxNTciLCJlbWFpbCI6IlRlc3QzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzg0MjEyMTYyLCJleHAiOjE3ODQyMTU3NjJ9.wGDqYO0iE17bbbLB5zTfCZQR_6B20bPhnpoK8SDMtG0"
 
     @task
     def create_event(self):
-        endpoint = "/api/v1/event"
+        endpoint = "/projects"
 
         payload = {
-            "title": "asdad",
-            "description": "asdadasd",
-            "date": "2026-07-02T00:00:00Z",
-            "time": "1000",
-            "location": "Blok",
-            "category": "blok",
-            "max_messages": 200,
-            "status": "active",
-            "organizer": "string (required)"
+            "name": "Project 1"
         }
-
+        
         headers = {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": f"Bearer {self.bearer_token}"
         }
 
         with self.client.post(endpoint, data=json.dumps(payload), headers=headers, catch_response=True) as response:

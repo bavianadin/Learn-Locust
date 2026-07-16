@@ -4,29 +4,23 @@ import random
 import logging
 
 class EventLoadTest(HttpUser):
-    host = "https://everlasting-api.ourmoment.my.id"
+    host = "https://mock-api.rrvs.my.id"
 
     wait_time = between(1, 5)
 
     @task
     def create_event(self):
-        endpoint = "/api/v1/event"
+        endpoint = "/auth/register"
 
         payload = {
-            "title": "asdad",
-            "description": "asdadasd",
-            "date": "2026-07-02T00:00:00Z",
-            "time": "1000",
-            "location": "Blok",
-            "category": "blok",
-            "max_messages": 200,
-            "status": "active",
-            "organizer": "string (required)"
+            "name": "Test2",
+            "email": "tests2@example.com",
+            "password": "password0123"
         }
 
         headers = {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
         }
 
         with self.client.post(endpoint, data=json.dumps(payload), headers=headers, catch_response=True) as response:

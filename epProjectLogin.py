@@ -1,29 +1,22 @@
 from locust import HttpUser, task, between
 import json
-import random
+# import random
 import logging
 
 class EventLoadTest(HttpUser):
-    host = "https://everlasting-api.ourmoment.my.id"
+    host = "https://mock-api.rrvs.my.id"
 
-    wait_time = between(1, 5)
+    # wait_time = between(1, 5)
 
     @task
     def create_event(self):
-        endpoint = "/api/v1/event"
+        endpoint = "/auth/login"
 
         payload = {
-            "title": "asdad",
-            "description": "asdadasd",
-            "date": "2026-07-02T00:00:00Z",
-            "time": "1000",
-            "location": "Blok",
-            "category": "blok",
-            "max_messages": 200,
-            "status": "active",
-            "organizer": "string (required)"
+            "email": "Test3@example.com",
+            "password": "password123"
         }
-
+        
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/json"
